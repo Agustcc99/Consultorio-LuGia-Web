@@ -136,7 +136,7 @@ export const site = {
     texto: 'Escribinos por WhatsApp: te respondemos en el horario de atención.',
     telefono: null,
     email: 'lucygianello@gmail.com',
-    direccion: 'Pública 6 N.º 3753, Barrio Jardín Horizonte, Córdoba'
+    direccion: 'Pública 6 N.º 3753, Barrio Jardín Horizonte, Córdoba',
     horarios: 'Lunes a viernes', // confirmado: sin horas publicadas
     mapa: 'Pública 6 3753, Jardín Horizonte, Córdoba, Argentina',
     mapsUrl: null,
