@@ -6,7 +6,7 @@ Página real para el consultorio LuGia de la Od. Luciana Gianello (mamá del usu
 ## Datos del negocio
 - Nombre comercial: LuGia (confirmar grafía del logo)
 - Rubro: Odontología
-- Zona / dirección: Barrio Jardín del Horizonte, Córdoba (calle y número por confirmar)
+- Zona / dirección: Barrio Jardín Horizonte, Córdoba (calle y número por confirmar)
 - Horarios: Lunes a viernes (horas por confirmar; WhatsApp Business dice 9 a 21)
 - WhatsApp (con código de país, ej. 5491122334455): 5493513938777 (por confirmar)
 - Email: lucygianello@gmail.com (por confirmar)

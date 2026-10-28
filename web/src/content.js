@@ -14,10 +14,10 @@ export const site = {
   whatsapp: { numero: '5493513938777', mensaje: 'Hola, quiero pedir un turno en LuGia.' },
 
   hero: {
-    etiqueta: 'Odontología · Jardín del Horizonte, Córdoba',
+    etiqueta: 'Odontología · Jardín Horizonte, Córdoba',
     titulo: 'Cuidamos tu sonrisa, con tiempo y cercanía.',
     subtitulo:
-      'Endodoncia y odontología general para niños, adultos y personas con discapacidad. Turnos de 45 minutos a 1 hora, sin apuro.',
+      'Endodoncia y odontología integral para niños, adultos y personas con discapacidad. Turnos de 45 minutos a 1 hora, sin apuro.',
     cta: 'Pedir turno',
     imagen: U('photo-1629909613654-28e377c37b09', 1920),
     datos: [
@@ -27,7 +27,7 @@ export const site = {
     ],
   },
 
-  cinta: ['Endodoncia', 'Odontología general', 'Coronas y prótesis', 'Implantes', 'Blanqueamientos', 'Niños y adultos', 'Urgencias'],
+  cinta: ['Endodoncia', 'Odontología integral', 'Coronas y prótesis', 'Implantes', 'Blanqueamientos', 'Niños y adultos', 'Urgencias'],
 
   servicios: {
     etiqueta: 'Tratamientos',
@@ -35,7 +35,7 @@ export const site = {
     estilo: 'tarjetas',
     items: [
       { icono: 'raiz', titulo: 'Endodoncias', descripcion: 'Tratamiento de conducto para conservar tu diente. Es el área en la que la Od. Gianello tiene más de 20 años de experiencia.' },
-      { icono: 'diente', titulo: 'Odontología general', descripcion: 'Controles, arreglos y plan de tratamiento para niños, adultos y personas con discapacidad.' },
+      { icono: 'diente', titulo: 'Odontología integral', descripcion: 'Controles, arreglos y plan de tratamiento para niños, adultos y personas con discapacidad.' },
       { icono: 'corona', titulo: 'Prótesis y coronas', descripcion: 'Coronas y prótesis para recuperar la comodidad al masticar y sonreír.' },
       { icono: 'herramienta', titulo: 'Implantes', descripcion: 'Evaluamos tu caso y te explicamos las opciones para reponer dientes ausentes.' },
       { icono: 'brillo', titulo: 'Blanqueamientos y limpiezas', descripcion: 'Limpiezas de control y blanqueamiento, previa evaluación de tu boca.' },
@@ -136,9 +136,9 @@ export const site = {
     texto: 'Escribinos por WhatsApp: te respondemos en el horario de atención.',
     telefono: null,
     email: 'lucygianello@gmail.com',
-    direccion: 'Barrio Jardín del Horizonte, Córdoba', // falta calle y número
+    direccion: 'Pública 6 N.º 3753, Barrio Jardín Horizonte, Córdoba'
     horarios: 'Lunes a viernes', // confirmado: sin horas publicadas
-    mapa: 'Jardín del Horizonte, Córdoba, Argentina',
+    mapa: 'Pública 6 3753, Jardín Horizonte, Córdoba, Argentina',
     mapsUrl: null,
   },
 

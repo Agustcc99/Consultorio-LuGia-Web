@@ -28,7 +28,7 @@
 - Atención particular (sin obras sociales). Sin precios: "se informan en la consulta". No hace ortodoncia.
 - Sin turnero: pre-admisión por WhatsApp con checkbox de términos/privacidad. Sin reseñas hasta que haya reales.
 - Paleta vino/bordó + rosas claros, sin verde agua. Fotos Unsplash de marcador por ahora.
-- Datos confirmados 2026-10-27: nombre LuGia, WhatsApp 5493513938777, lucygianello@gmail.com, Jardín del Horizonte (Córdoba), horario provisorio Lunes a viernes 9 a 21.
+- Datos confirmados 2026-10-27: nombre LuGia, WhatsApp 5493513938777, lucygianello@gmail.com, Jardín Horizonte (Córdoba), Pública 6 N.º 3753, horario provisorio Lunes a viernes 9 a 21.
 - Frontend solo en Cloudflare Pages; dominio sugerido lugia.com.ar (lo compra el usuario).
 
 ## Fuera de alcance pedido por el cliente (cotizar aparte)
