@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* Único lugar para la identidad visual: cambiar estos valores por cliente. */
+/* LuGia: blanco con aire, vino/bordó como color de marca y rosas claros en los bloques alternados. */
+@theme {
+  --color-fondo: #ffffff;
+  --color-superficie: #fbf2f4; /* rosa muy claro: bloques alternados y fondos de tarjetas */
+  --color-texto: #2b1620;
+  --color-suave: #5c4650; /* texto secundario: ≥ 4.5:1 sobre blanco y sobre rosa */
+  --color-borde: #ecd9de; /* borde rosado (tarjetas) */
+  --color-linea: #efe3e6; /* filetes finos sobre blanco */
+  --color-borde-fuerte: #d8c3c9; /* contorno de chips, campos y botones secundarios */
+  --color-brand: #7a1f3d;
+  --color-brand-oscuro: #5c1730; /* hover de botones y texto sobre tinte */
+  --color-sobre-brand: #ffffff; /* texto sobre botones brand: contraste ≥ 4.5:1 */
+  --color-tinte: #f9e4ea; /* rosa claro: fondos de íconos y etiquetas */
+  --color-arco: #e3a9bb; /* contorno fino detrás de las fotos en arco */
+  --color-acento: #a23b5e;
+  --color-resalte: #f4a9c0; /* chispa rosa: solo decorativa (punto del logo) */
+  --color-sobre-resalte: #2b1620;
+  /* Urgencias: naranja oscuro en vez de rojo, firme pero sin alarmar. Todos ≥ 4.5:1 entre sí. */
+  --color-alerta: #9a3412;
+  --color-alerta-texto: #7c2d12;
+  --color-alerta-fondo: #fff7ed;
+  --color-alerta-borde: #fed7aa;
+  --color-whatsapp: #25d366;
+  --color-sobre-whatsapp: #052e16; /* el blanco sobre el verde de WhatsApp no llega a 4.5:1 */
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif; /* títulos */
+
+  /* Ritmo del movimiento (mismas curvas en src/lib/movimiento.js para Motion). Uso: ease-entrar, ease-tocar… */
+  --ease-entrar: cubic-bezier(0.16, 1, 0.3, 1); /* llega rápido y se posa despacio: apariciones */
+  --ease-pasar: cubic-bezier(0.65, 0, 0.35, 1); /* simétrica: cambio de paso del formulario, acordeón */
+  --ease-salir: cubic-bezier(0.4, 0, 1, 1); /* se va sin frenar: salidas */
+  --ease-tocar: cubic-bezier(0.3, 0.7, 0.4, 1); /* respuesta corta: hover, chips, botones */
+  --ease-respirar: cubic-bezier(0.25, 0.6, 0.15, 1); /* larga y suave: solo la foto de la portada */
+  --ease-resorte: linear(0, 0.38 9%, 0.84 20%, 1.04 31%, 1.03 42%, 1 56%, 1); /* resorte amortiguado: botones */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Preguntas frecuentes: la caja abre seca (el contenido de abajo no salta por una altura que se anima)
+   y la respuesta se destapa de arriba hacia abajo con un fundido. Al cerrar, corta sin animar. */
+@keyframes destapar {
+  from {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+  }
+  to {
+    clip-path: inset(0);
+    opacity: 1;
+  }
+}
+details[open] > .respuesta {
+  animation: destapar 200ms var(--ease-entrar) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  details[open] > .respuesta {
+    animation: none;
+  }
+}

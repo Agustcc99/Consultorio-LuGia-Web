@@ -10,14 +10,14 @@
 
 ## Estado
 - Estación actual: 3-Frontend (base de código: D:/Escritorio/clientes/Odontologia/demo-alameda; guía: PROXIMA-SESION-LuGia.md)
-- Próximo paso: /web-frontend (copiar demo-alameda a web/, sacar modo demo, paleta vino)
+- Próximo paso: pedir logo/flyers, calle y número, horas exactas, redes y textos; luego ajustar colores al logo y /web-deploy (sitemap.xml cuando haya dominio)
 - Esperando del cliente: logo y flyers, horas exactas, links de redes, textos de la frase y FAQ, fotos reales
 - Rondas de cambios usadas: 0/2
 
 ## Estaciones
 - [x] 1 Brief (contenido parcial) y contenido recibido (`/web-nuevo-cliente`)
 - [x] 2 Alcance (gratis, sin presupuesto) (`/web-alcance`)
-- [ ] 3 Frontend listo (`/web-frontend`) → preview al cliente (`/web-deploy preview`)
+- [x] 3 Frontend listo (v1 con marcadores; falta logo y fotos reales) (`/web-frontend`) → preview al cliente (`/web-deploy preview`)
 - [ ] 4 Backend listo (solo Premium) (`/web-backend`)
 - [ ] 5 Auditoría y deploy a producción (`/web-deploy`)
 - [ ] 6 Rondas de cambios cerradas, saldo cobrado, entrega hecha (`/web-entrega`)
@@ -38,5 +38,6 @@
 - Hosting: — | Formulario: — | DB: — | Backend: —
 
 ## Log (más reciente arriba, 1 línea por sesión)
+- 2026-10-27 — Frontend v1 en web/: modo demo fuera, paleta vino, contenido real, pre-admisión sin cobertura + privacidad, JSON-LD. Build OK. Faltan: logo, fotos (docs/FOTOS.md), calle/número, horas, redes, FAQ de la mamá.
 - 2026-10-27 — Cliente creado.
 - 2026-10-27 — Alcance escrito (docs/ALCANCE.md), plan Profesional gratis.
