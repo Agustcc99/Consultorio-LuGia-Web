@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { AnimatePresence, m } from 'motion/react'
 import { site } from '../content.js'
 import Icono from '../lib/iconos.jsx'
@@ -13,6 +15,9 @@ import Titulo from './Titulo.jsx'
 const DIAS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
 const FRANJAS = ['Mañana', 'Tarde', 'Me da igual']
 const PASOS = ['Motivo', 'Tus datos', 'Cuándo', 'Enviar']
+
+gsap.registerPlugin(ScrollTrigger)
+const reducir = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 const medir = (evento) => window.gtag?.('event', evento) // sin datos del paciente: solo en qué paso va
 
@@ -39,6 +44,9 @@ export default function PreAdmision() {
   const { etiqueta, titulo, texto, motivos } = site.preadmision
 
   const [paso, setPaso] = useState(0)
+  const raiz = useRef(null)
+  const pasoRef = useRef(null)
+  const enviar = useRef(null)
   const [copiado, setCopiado] = useState(false)
   const [d, setD] = useState({
     motivo: null,
@@ -68,6 +76,40 @@ export default function PreAdmision() {
   const faltaDato = !d.nombre.trim() || d.edad === '' ? 'Completá nombre y edad para seguir.' : 'Completá el adulto responsable para seguir.'
   const mensaje = armarMensaje(d)
 
+  // GSAP · al llegar a la sección: el formulario sube y se endereza, los 4 pasos aparecen uno tras otro
+  // y las ventajas de la izquierda entran escalonadas.
+  useLayoutEffect(() => {
+    if (reducir()) return
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ scrollTrigger: { trigger: '#formulario-turno', start: 'top 88%', once: true } })
+      tl.from('#formulario-turno', { y: 56, opacity: 0, rotateX: 7, transformPerspective: 900, transformOrigin: '50% 100%', duration: 0.95, ease: 'power3.out', clearProps: 'transform' })
+        .from('#formulario-turno ol li > span:first-child > span:first-child', { scale: 0, duration: 0.55, stagger: 0.1, ease: 'back.out(2.6)' }, '-=0.5')
+        .from('#formulario-turno ol li > span:last-child', { opacity: 0, y: 8, duration: 0.4, stagger: 0.1, ease: 'power2.out' }, '<0.05')
+        .from('#pedir-turno ul li', { x: -18, opacity: 0, duration: 0.5, stagger: 0.12, ease: 'power3.out' }, '-=0.7')
+    }, raiz)
+    return () => ctx.revert()
+  }, [])
+
+  // GSAP · cada paso nuevo: las opciones entran con un pequeño rebote, una tras otra.
+  function animarPaso(def) {
+    if (reducir() || !pasoRef.current || def?.opacity !== 1) return
+    gsap.from(pasoRef.current.querySelectorAll('button[aria-pressed], label, textarea, pre'), {
+      y: 14,
+      scale: 0.94,
+      opacity: 0,
+      duration: 0.5,
+      stagger: 0.05,
+      ease: 'back.out(2)',
+      clearProps: 'transform,opacity',
+    })
+  }
+
+  // GSAP · al aceptar los términos, el botón de enviar "se despierta" con un salto elástico.
+  useEffect(() => {
+    if (!d.acepta || reducir() || !enviar.current) return
+    gsap.fromTo(enviar.current, { scale: 0.9, y: 6 }, { scale: 1, y: 0, duration: 0.9, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' })
+  }, [d.acepta])
+
   async function copiar() {
     try {
       await navigator.clipboard.writeText(mensaje)
@@ -80,7 +122,7 @@ export default function PreAdmision() {
   const pregunta = 'font-display text-[23px] leading-tight font-bold tracking-[-0.02em] text-texto sm:text-[28px]'
 
   return (
-    <section id="pedir-turno" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] bg-fondo py-10 sm:py-14">
+    <section ref={raiz} id="pedir-turno" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] bg-fondo py-10 sm:py-14">
       <div className={`${contenedor} grid gap-8 lg:grid-cols-[2fr_3fr] lg:gap-20`}>
         <Reveal efecto="texto" className="lg:pt-2">
           <Titulo etiqueta={etiqueta}>{titulo}</Titulo>
@@ -130,7 +172,7 @@ export default function PreAdmision() {
           </ol>
 
           <AnimatePresence mode="wait" initial={false}>
-            <m.div key={paso} {...cambioDePaso} className="mt-7 sm:mt-10">
+            <m.div key={paso} ref={pasoRef} {...cambioDePaso} onAnimationStart={animarPaso} className="mt-7 sm:mt-10">
               {paso === 0 && (
                 <div>
                   <p className="text-sm font-medium text-slate-500 sm:text-[15px]">Paso 1 de 4</p>
@@ -238,6 +280,8 @@ export default function PreAdmision() {
                   </label>
                   <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
                     <a
+                      ref={enviar}
+                      data-brillo={d.acepta ? '' : undefined}
                       href={d.acepta ? whatsappUrl(mensaje) : undefined}
                       target="_blank"
                       rel="noopener noreferrer"

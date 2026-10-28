@@ -4,8 +4,10 @@ import { LazyMotion, MotionConfig, domAnimation } from 'motion/react'
 import './index.css'
 import App from './App.jsx'
 import { iniciarMedicion } from './lib/medicion.js'
+import { iniciarBotones } from './lib/botonesGsap.js'
 
 iniciarMedicion()
+iniciarBotones()
 
 // Motion: LazyMotion carga solo lo necesario (componentes `m.*`); reducedMotion respeta "reducir movimiento" del sistema.
 createRoot(document.getElementById('root')).render(

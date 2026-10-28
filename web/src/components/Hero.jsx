@@ -48,7 +48,7 @@ export default function Hero() {
             {subtitulo}
           </m.p>
           <m.div variants={item()} className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-10">
-            <a {...ctaPrincipal()} className={`${botonPrimario} min-h-[58px] px-8 text-lg`}>
+            <a {...ctaPrincipal()} data-brillo className={`${botonPrimario} min-h-[58px] px-8 text-lg`}>
               {cta}
               <Icono nombre="flecha" className={flecha} />
             </a>
