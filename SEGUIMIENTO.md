@@ -11,7 +11,7 @@
 ## Estado
 - Estación actual: 3-Frontend (base de código: D:/Escritorio/clientes/Odontologia/demo-alameda; guía: PROXIMA-SESION-LuGia.md)
 - Próximo paso: pedir logo/flyers, calle y número, horas exactas, redes y textos; luego ajustar colores al logo y /web-deploy (sitemap.xml cuando haya dominio)
-- Esperando del cliente: logo y flyers, horas exactas, links de redes, textos de la frase y FAQ, fotos reales
+- Esperando del cliente: calle y número, links de redes, textos de la frase y FAQ, fotos reales
 - Rondas de cambios usadas: 0/2
 
 ## Estaciones
@@ -38,6 +38,7 @@
 - Hosting: — | Formulario: — | DB: — | Backend: —
 
 ## Log (más reciente arriba, 1 línea por sesión)
+- 2026-10-27 — Llegaron logos y flyers (assets/). Horario: solo "Lunes a viernes". Logo del diente recoloreado a vino + dorado (assets/logo-diente.png), favicon nuevo. Falta: calle/número, redes, fotos reales, SVG del logo.
 - 2026-10-27 — Frontend v1 en web/: modo demo fuera, paleta vino, contenido real, pre-admisión sin cobertura + privacidad, JSON-LD. Build OK. Faltan: logo, fotos (docs/FOTOS.md), calle/número, horas, redes, FAQ de la mamá.
 - 2026-10-27 — Cliente creado.
 - 2026-10-27 — Alcance escrito (docs/ALCANCE.md), plan Profesional gratis.

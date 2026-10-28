@@ -9,7 +9,7 @@ export const site = {
   plan: 'semi',
   nombre: 'LuGia',
   logo: null,
-  logoIcono: '/icono.svg',
+  logoIcono: '/logo.png',
 
   whatsapp: { numero: '5493513938777', mensaje: 'Hola, quiero pedir un turno en LuGia.' },
 
@@ -137,7 +137,7 @@ export const site = {
     telefono: null,
     email: 'lucygianello@gmail.com',
     direccion: 'Barrio Jardín del Horizonte, Córdoba', // falta calle y número
-    horarios: 'Lunes a viernes, de 9 a 21 h', // provisorio: confirmar horas exactas
+    horarios: 'Lunes a viernes', // confirmado: sin horas publicadas
     mapa: 'Jardín del Horizonte, Córdoba, Argentina',
     mapsUrl: null,
   },
