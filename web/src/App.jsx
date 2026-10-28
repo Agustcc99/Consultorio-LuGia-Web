@@ -15,10 +15,12 @@ import Footer from './components/Footer.jsx'
 import WhatsAppFloat from './components/WhatsAppFloat.jsx'
 import BarraMovil from './components/BarraMovil.jsx'
 import ProgresoScroll from './components/ProgresoScroll.jsx'
+import Lunares from './components/Lunares.jsx'
 
 export default function App() {
   return (
-    <div className="min-h-screen overflow-x-clip bg-fondo font-sans text-texto antialiased selection:bg-brand selection:text-sobre-brand">
+    <div className="relative isolate min-h-screen overflow-x-clip bg-fondo font-sans text-texto antialiased selection:bg-brand selection:text-sobre-brand">
+      <Lunares />
       <ProgresoScroll />
       <Navbar />
       <main>

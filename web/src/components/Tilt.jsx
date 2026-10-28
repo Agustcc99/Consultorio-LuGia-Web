@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { m, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react'
+import { useEffect, useRef, useState } from 'react'
+import { m, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react'
 import { resorte } from '../lib/movimiento.js'
 
 // Inclinación 3D con resorte que sigue al mouse (máx. `max` grados). Solo con mouse: en celular y con
@@ -7,6 +7,7 @@ import { resorte } from '../lib/movimiento.js'
 export default function Tilt({ as = 'div', max = 6, gestos = false, className = '', children, ...props }) {
   const Tag = m[as]
   const reducir = useReducedMotion()
+  const ref = useRef(null)
   const [conMouse, setConMouse] = useState(false)
   const px = useMotionValue(0)
   const py = useMotionValue(0)
@@ -21,6 +22,13 @@ export default function Tilt({ as = 'div', max = 6, gestos = false, className = 
 
   const activo = conMouse && !reducir
 
+  // Celular (sin mouse): la inclinación sigue al scroll; la pieza se acomoda mientras cruza la pantalla.
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const sx = useSpring(scrollYProgress, resorte.inclinar)
+  const scrollX = useTransform(sx, [0, 0.5, 1], [max * 0.9, 0, -max * 0.9])
+  const scrollY = useTransform(sx, [0, 0.5, 1], [-max * 0.7, 0, max * 0.7])
+  const porScroll = !conMouse && !reducir
+
   const mover = (e) => {
     const r = e.currentTarget.getBoundingClientRect()
     px.set((e.clientX - r.left) / r.width - 0.5)
@@ -33,13 +41,14 @@ export default function Tilt({ as = 'div', max = 6, gestos = false, className = 
 
   return (
     <Tag
+      ref={ref}
       onPointerMove={activo ? mover : undefined}
       onPointerLeave={activo ? soltar : undefined}
       // gestos (tarjetas): crece un poco con el mouse encima, se hunde al tocar o hacer clic, y se marca al enfocar con teclado.
       whileHover={gestos && activo ? { scale: 1.025, transition: resorte.gesto } : undefined}
       whileTap={gestos ? { scale: 0.97, transition: resorte.gesto } : undefined}
       whileFocus={gestos ? { scale: 1.015, transition: resorte.gesto } : undefined}
-      style={activo ? { rotateX, rotateY, transformPerspective: 900, transformStyle: 'preserve-3d' } : undefined}
+      style={activo ? { rotateX, rotateY, transformPerspective: 900, transformStyle: 'preserve-3d' } : porScroll ? { rotateX: scrollX, rotateY: scrollY, transformPerspective: 900, transformStyle: 'preserve-3d' } : undefined}
       className={className}
       {...props}
     >

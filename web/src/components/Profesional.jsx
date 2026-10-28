@@ -12,7 +12,7 @@ export default function Profesional() {
   const { etiqueta, nombre, especialidad, matricula, imagen, frase, formacion = [] } = site.profesional
 
   return (
-    <section id="profesional" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] overflow-hidden bg-superficie py-10 sm:py-14">
+    <section id="profesional" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] overflow-hidden bg-superficie/70 py-10 sm:py-14">
       <div className={`${contenedor} grid items-center gap-10 md:grid-cols-[5fr_6fr] md:gap-24`}>
         <p className="text-[13px] font-semibold tracking-[0.14em] text-brand uppercase md:hidden">{etiqueta}</p>
 
@@ -31,7 +31,7 @@ export default function Profesional() {
               src={imagen}
               alt={`${nombre}, ${especialidad}`}
               loading="lazy"
-              className="relative aspect-[22/29] w-full rounded-t-[999px] rounded-b-[28px] object-cover object-[68%_30%]"
+              className="relative aspect-[22/29] w-full rounded-t-[999px] rounded-b-[28px] object-cover object-[50%_70%]"
             />
           </Tilt>
         </Reveal>

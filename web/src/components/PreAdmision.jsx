@@ -12,7 +12,7 @@ import Titulo from './Titulo.jsx'
 
 // Pre-admisión (Profesional): 4 pasos que arman el pedido de turno y lo abren en WhatsApp.
 // Solo preguntas administrativas, no historia clínica. No guarda nada (ni servidor ni localStorage).
-const DIAS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']
+const DIAS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie']
 const FRANJAS = ['Mañana', 'Tarde', 'Me da igual']
 const PASOS = ['Motivo', 'Tus datos', 'Cuándo', 'Enviar']
 
@@ -122,7 +122,7 @@ export default function PreAdmision() {
   const pregunta = 'font-display text-[23px] leading-tight font-bold tracking-[-0.02em] text-texto sm:text-[28px]'
 
   return (
-    <section ref={raiz} id="pedir-turno" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] bg-fondo py-10 sm:py-14">
+    <section ref={raiz} id="pedir-turno" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] bg-transparent py-10 sm:py-14">
       <div className={`${contenedor} grid gap-8 lg:grid-cols-[2fr_3fr] lg:gap-20`}>
         <Reveal efecto="texto" className="lg:pt-2">
           <Titulo etiqueta={etiqueta}>{titulo}</Titulo>
@@ -219,15 +219,15 @@ export default function PreAdmision() {
                 <div>
                   <p className="text-sm font-medium text-slate-500 sm:text-[15px]">Paso 3 de 4</p>
                   <p className={`mt-1 ${pregunta}`}>¿Cuándo te queda mejor?</p>
-                  <div className="mt-5 flex flex-wrap gap-2.5">
+                  <div className="mt-5 grid grid-cols-3 gap-2 sm:gap-2.5">
                     {FRANJAS.map((f) => (
-                      <button key={f} type="button" aria-pressed={d.franja === f} onClick={() => setD({ ...d, franja: f })} className={chip(d.franja === f)}>
+                      <button key={f} type="button" aria-pressed={d.franja === f} onClick={() => setD({ ...d, franja: f })} className={`${chip(d.franja === f)} px-2 text-[15px] leading-tight sm:px-5 sm:text-base`}>
                         {f}
                       </button>
                     ))}
                   </div>
                   <p className="mt-6 text-[15px] font-semibold text-texto">Días que podés (opcional)</p>
-                  <div className="mt-2 grid grid-cols-6 gap-1.5 sm:gap-2">
+                  <div className="mt-2 grid grid-cols-5 gap-2">
                     {DIAS.map((dia) => {
                       const activo = d.dias.includes(dia)
                       return (

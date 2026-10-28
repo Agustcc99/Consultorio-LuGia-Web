@@ -21,7 +21,7 @@ export default function Contacto() {
   ].filter(Boolean)
 
   return (
-    <section id="contacto" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] bg-superficie py-10 sm:py-14">
+    <section id="contacto" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] bg-superficie/70 py-10 sm:py-14">
       <div className={`${contenedor} grid items-start gap-6 md:grid-cols-2 md:gap-16`}>
         <Reveal efecto="texto">
           <Titulo etiqueta={etiqueta}>{titulo}</Titulo>
@@ -59,7 +59,7 @@ export default function Contacto() {
               <div className="h-[180px] bg-superficie sm:h-[260px]">
                 <iframe
                   title={`Mapa de ${site.nombre}`}
-                  src={`https://www.google.com/maps?q=${encodeURIComponent(mapa)}&output=embed`}
+                  src={`https://www.google.com/maps?q=${encodeURIComponent(site.contacto.mapaCoords ?? mapa)}&z=17&output=embed`}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   onLoad={() => setMapaListo(true)}

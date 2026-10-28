@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, m } from 'motion/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { curva } from '../lib/movimiento.js'
 import { site } from '../content.js'
 import Icono from '../lib/iconos.jsx'
+import LogoAnimado from './LogoAnimado.jsx'
 import { contenedor } from '../lib/estilos.js'
 import { ctaPrincipal, whatsappUrl } from '../lib/whatsapp.js'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const nombreDe = (seccion) => seccion?.etiqueta ?? seccion?.titulo
 
@@ -47,11 +52,56 @@ export default function Navbar() {
 
   const marcada = scrolleado || abierto
 
+  // GSAP: la barra baja desde arriba al cargar, se esconde al bajar y vuelve al subir; un subrayado dorado
+  // se desliza hasta el link de la sección que se está viendo.
+  const lista = useRef(null)
+  const marca = useRef(null)
+  const abiertoRef = useRef(false)
+  const [activo, setActivo] = useState(null)
+  abiertoRef.current = abierto
+
+  useEffect(() => {
+    const reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const ctx = gsap.context(() => {
+      if (!reducir) {
+        gsap.from(ref.current, { yPercent: -100, duration: 0.9, ease: 'power3.out', delay: 0.1 })
+        ScrollTrigger.create({
+          start: 0,
+          end: 'max',
+          onUpdate: (self) => {
+            const oculta = self.direction === 1 && self.scroll() > 240 && !abiertoRef.current
+            gsap.to(ref.current, { yPercent: oculta ? -100 : 0, duration: 0.4, ease: 'power3.out', overwrite: 'auto' })
+          },
+        })
+      }
+      links.forEach((l) => {
+        const sec = document.querySelector(l.href)
+        if (!sec) return
+        ScrollTrigger.create({
+          trigger: sec,
+          start: 'top 45%',
+          end: 'bottom 45%',
+          onToggle: (self) => self.isActive && setActivo(l.href),
+        })
+      })
+      ScrollTrigger.create({ trigger: document.body, start: 'top top', end: '+=300', onLeaveBack: () => setActivo(null) })
+    }, ref)
+    return () => ctx.revert()
+  }, [])
+
+  useEffect(() => {
+    const reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const a = lista.current?.querySelector(`a[href="${activo}"]`)
+    if (!marca.current || !lista.current) return
+    if (!a) return void gsap.to(marca.current, { opacity: 0, duration: 0.2 })
+    gsap.to(marca.current, { x: a.offsetLeft, width: a.offsetWidth, opacity: 1, duration: reducir ? 0 : 0.55, ease: 'elastic.out(1, 0.7)' })
+  }, [activo])
+
   return (
     <header ref={ref} className="fixed inset-x-0 top-0 z-40">
       <div
-        className={`border-b bg-fondo/95 text-texto backdrop-blur-md transition-[border-color,box-shadow] duration-200 ease-tocar ${
-          marcada ? 'border-linea shadow-[0_8px_24px_-18px_rgba(15,23,42,0.35)]' : 'border-transparent'
+        className={`border-b bg-gradient-to-r from-brand-oscuro via-brand to-brand-oscuro text-sobre-brand transition-[border-color,box-shadow] duration-200 ease-tocar ${
+          marcada ? 'border-white/10 shadow-[0_14px_30px_-14px_rgba(60,10,30,0.55)]' : 'border-transparent'
         }`}
       >
         <nav ref={barra} className={`${contenedor} flex h-[68px] items-center justify-between gap-6 md:h-[84px]`}>
@@ -60,16 +110,19 @@ export default function Navbar() {
               <img src={site.logo} alt={site.nombre} className="h-10 w-auto" />
             ) : (
               <>
-                {site.logoIcono && <img src={site.logoIcono} alt="" className="h-9 w-9 shrink-0 md:h-10 md:w-10" />}
+                {site.logoIcono && <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_6px_16px_-6px_rgba(0,0,0,0.4)] md:h-12 md:w-12">
+                    <LogoAnimado src={site.logoIcono} className="h-9 w-9 md:h-10 md:w-10" />
+                  </span>}
                 <span className="line-clamp-2 text-[17px] leading-tight md:text-[19px]">{site.nombre}</span>
               </>
             )}
           </a>
 
-          <ul className="hidden items-center gap-7 text-[15px] font-medium lg:flex">
+          <ul ref={lista} className="relative hidden items-center gap-7 text-[15px] font-medium lg:flex">
+            <span ref={marca} aria-hidden="true" className="pointer-events-none absolute -bottom-2 left-0 h-[3px] w-0 rounded-full bg-gradient-to-r from-resalte to-[#e3b34f] opacity-0" />
             {links.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className="text-slate-700 transition-colors duration-160 ease-tocar hover:text-brand">
+                <a href={l.href} className="block py-2 text-white/80 transition-colors duration-160 ease-tocar hover:text-white">
                   {l.label}
                 </a>
               </li>
@@ -77,13 +130,13 @@ export default function Navbar() {
           </ul>
 
           <div className="ml-auto hidden items-center gap-5 md:flex lg:ml-0">
-            <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-base font-semibold transition-colors duration-160 ease-tocar hover:text-brand">
-              <Icono nombre="chat" className="h-[18px] w-[18px] text-brand" />
+            <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-base font-semibold text-white transition-colors duration-160 ease-tocar hover:text-resalte">
+              <Icono nombre="chat" className="h-[18px] w-[18px] text-resalte" />
               WhatsApp
             </a>
             <a
               {...ctaPrincipal()}
-              className="inline-flex h-12 items-center rounded-full bg-brand px-6 text-base font-semibold text-sobre-brand transition duration-160 ease-tocar hover:bg-brand-oscuro active:scale-[0.98]"
+              className="inline-flex h-12 items-center rounded-full bg-white px-6 text-base font-semibold text-brand transition duration-160 ease-tocar hover:bg-tinte active:scale-[0.98]"
             >
               {site.hero.cta}
             </a>
@@ -92,7 +145,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setAbierto(!abierto)}
-            className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full border-[1.5px] border-linea lg:hidden"
+            className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full border-[1.5px] border-white/35 lg:hidden"
             aria-label={abierto ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={abierto}
           >
@@ -118,7 +171,7 @@ export default function Navbar() {
               initial={{ clipPath: 'inset(0 0 100% 0)', opacity: 0, y: -4 }}
               animate={{ clipPath: 'inset(0 0 0% 0)', opacity: 1, y: 0, transition: { duration: 0.2, ease: curva.entrar } }}
               exit={{ clipPath: 'inset(0 0 100% 0)', opacity: 0, y: -4, transition: { duration: 0.14, ease: curva.salir } }}
-              className={`${contenedor} border-t border-linea py-2 lg:hidden`}
+              className={`${contenedor} border-t border-white/15 py-2 lg:hidden`}
             >
               {links.map((l) => (
                 <li key={l.href}>

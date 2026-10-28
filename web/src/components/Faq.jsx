@@ -8,7 +8,7 @@ import Titulo from './Titulo.jsx'
 // Acordeón: la respuesta se destapa con clip-path y fundido (index.css) y el "+" pasa a "−" con el círculo lleno, sin girar.
 export default function Faq() {
   return (
-    <section id="faq" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] bg-fondo py-10 sm:py-14">
+    <section id="faq" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] bg-transparent py-10 sm:py-14">
       <div className={`${contenedor} grid items-start gap-6 md:grid-cols-[4fr_7fr] md:gap-20`}>
         <Reveal efecto="texto">
           <Titulo etiqueta="Dudas">Preguntas frecuentes</Titulo>

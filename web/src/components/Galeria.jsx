@@ -11,7 +11,7 @@ export default function Galeria() {
   const { etiqueta, titulo, imagenes } = site.galeria
 
   return (
-    <section id="galeria" className="scroll-mt-20 bg-fondo py-14">
+    <section id="galeria" className="scroll-mt-20 bg-transparent py-14">
       <div className="mx-auto max-w-6xl px-4">
         <Reveal>
           <Titulo etiqueta={etiqueta}>{titulo}</Titulo>

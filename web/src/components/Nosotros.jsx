@@ -10,7 +10,7 @@ export default function Nosotros() {
   const { etiqueta, titulo, texto, imagen, puntos = [] } = site.nosotros
 
   return (
-    <section id="nosotros" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] overflow-hidden bg-fondo py-10 sm:py-14">
+    <section id="nosotros" className="scroll-mt-[calc(var(--alto-header,7rem)_+_1rem)] overflow-hidden bg-transparent py-10 sm:py-14">
       <div className={`${contenedor} grid items-center gap-8 md:grid-cols-[6fr_5fr] md:gap-24`}>
         <Reveal efecto="texto">
           <Titulo etiqueta={etiqueta}>{titulo}</Titulo>
@@ -34,9 +34,9 @@ export default function Nosotros() {
               <div aria-hidden="true" className="absolute bottom-5 -left-5 h-[200px] w-[200px] rounded-full bg-superficie sm:bottom-10 sm:-left-9 sm:h-[300px] sm:w-[300px] sm:[transform:translateZ(-30px)]" />
               <img
                 src={imagen}
-                alt="Sillón odontológico en un consultorio limpio y ordenado"
+                alt="Sala de espera del consultorio LuGia"
                 loading="lazy"
-                className="relative aspect-[23/29] w-full rounded-t-[999px] rounded-b-[28px] object-cover object-[55%_55%]"
+                className="relative aspect-[23/29] w-full rounded-t-[999px] rounded-b-[28px] object-cover object-[50%_60%]"
               />
             </Tilt>
           </Reveal>

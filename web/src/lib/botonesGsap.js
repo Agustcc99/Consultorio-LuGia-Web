@@ -68,8 +68,17 @@ export function iniciarBotones() {
     const b = objetivo(e)
     if (!b || inactivo(b)) return
     gsap.to(b, { scale: 0.94, duration: 0.12, ease: 'power2.out', overwrite: 'auto' })
+    // Celular: no hay "pasar el mouse", así que el relleno nace desde donde se toca y se retira al soltar.
+    const tactil = e.pointerType === 'touch' && b.classList.contains('btn-gsap')
+    if (tactil) {
+      const r = b.getBoundingClientRect()
+      const d = Math.hypot(r.width, r.height) * 2
+      gsap.set(relleno(b), { width: d, height: d, x: e.clientX - r.left, y: e.clientY - r.top, xPercent: -50, yPercent: -50, scale: 0, opacity: 0.18 })
+      gsap.to(relleno(b), { scale: 1, duration: 0.5, ease: 'power3.out', overwrite: true })
+    }
     const soltar = () => {
       gsap.to(b, { scale: 1, duration: 0.7, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' })
+      if (tactil) gsap.to(relleno(b), { opacity: 0, duration: 0.45, ease: 'power2.out', overwrite: true })
       removeEventListener('pointerup', soltar)
       removeEventListener('pointercancel', soltar)
     }

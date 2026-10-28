@@ -4,5 +4,5 @@ import { m, useScroll } from 'motion/react'
 export default function ProgresoScroll() {
   const { scrollYProgress } = useScroll()
 
-  return <m.div aria-hidden="true" style={{ scaleX: scrollYProgress }} className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-brand" />
+  return <m.div aria-hidden="true" style={{ scaleX: scrollYProgress }} className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gradient-to-r from-resalte to-[#e3b34f]" />
 }

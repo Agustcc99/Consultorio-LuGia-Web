@@ -63,12 +63,12 @@ export default function Hero() {
           <div aria-hidden="true" className="absolute top-8 -right-5 h-[260px] w-[260px] rounded-full bg-superficie sm:h-[360px] sm:w-[360px] md:top-10 md:-right-6 md:h-[440px] md:w-[440px] md:[transform:translateZ(-40px)]" />
           <m.img
             src={imagen}
-            alt="Consultorio odontológico luminoso"
+            alt="Sillón odontológico del consultorio LuGia"
             fetchpriority="high"
             initial={{ scale: 1.03 }}
             animate={{ scale: 1 }}
             transition={{ duration: duracion.foto, ease: curva.respirar }}
-            className="absolute top-0 right-0 left-4 h-[410px] w-[calc(100%_-_1rem)] rounded-t-[999px] rounded-b-[28px] object-cover object-[55%_60%] sm:h-[540px] md:left-auto md:h-[620px] md:w-[min(calc(100%_-_2.25rem),500px)]"
+            className="absolute top-0 right-0 left-4 h-[410px] w-[calc(100%_-_1rem)] rounded-t-[999px] rounded-b-[28px] object-cover object-[50%_75%] sm:h-[540px] md:left-auto md:h-[620px] md:w-[min(calc(100%_-_2.25rem),500px)]"
           />
           {profesional && (
             <div className="absolute bottom-0 left-0 [transform:translateZ(60px)]">
