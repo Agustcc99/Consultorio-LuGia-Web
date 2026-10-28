@@ -9,14 +9,14 @@
 - Fecha inicio: 2026-10-27 | Entrega estimada: —
 
 ## Estado
-- Estación actual: 1-Brief (base de código: D:/Escritorio/clientes/Odontologia/demo-alameda; guía: PROXIMA-SESION-LuGia.md)
-- Próximo paso: Confirmar dudas del paso 0, correr /web-alcance y armar la web desde la demo-alameda
+- Estación actual: 3-Frontend (base de código: D:/Escritorio/clientes/Odontologia/demo-alameda; guía: PROXIMA-SESION-LuGia.md)
+- Próximo paso: /web-frontend (copiar demo-alameda a web/, sacar modo demo, paleta vino)
 - Esperando del cliente: logo y flyers, horas exactas, links de redes, textos de la frase y FAQ, fotos reales
 - Rondas de cambios usadas: 0/2
 
 ## Estaciones
-- [ ] 1 Brief y contenido recibido (`/web-nuevo-cliente`)
-- [ ] 2 Alcance + presupuesto aprobado + seña cobrada (`/web-alcance`)
+- [x] 1 Brief (contenido parcial) y contenido recibido (`/web-nuevo-cliente`)
+- [x] 2 Alcance (gratis, sin presupuesto) (`/web-alcance`)
 - [ ] 3 Frontend listo (`/web-frontend`) → preview al cliente (`/web-deploy preview`)
 - [ ] 4 Backend listo (solo Premium) (`/web-backend`)
 - [ ] 5 Auditoría y deploy a producción (`/web-deploy`)
@@ -28,6 +28,7 @@
 - Atención particular (sin obras sociales). Sin precios: "se informan en la consulta". No hace ortodoncia.
 - Sin turnero: pre-admisión por WhatsApp con checkbox de términos/privacidad. Sin reseñas hasta que haya reales.
 - Paleta vino/bordó + rosas claros, sin verde agua. Fotos Unsplash de marcador por ahora.
+- Datos confirmados 2026-10-27: nombre LuGia, WhatsApp 5493513938777, lucygianello@gmail.com, Jardín del Horizonte (Córdoba), horario provisorio Lunes a viernes 9 a 21.
 - Frontend solo en Cloudflare Pages; dominio sugerido lugia.com.ar (lo compra el usuario).
 
 ## Fuera de alcance pedido por el cliente (cotizar aparte)
@@ -38,3 +39,4 @@
 
 ## Log (más reciente arriba, 1 línea por sesión)
 - 2026-10-27 — Cliente creado.
+- 2026-10-27 — Alcance escrito (docs/ALCANCE.md), plan Profesional gratis.
